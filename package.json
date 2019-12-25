@@ -43,7 +43,6 @@
     "last 2 versions"
   ],
   "description": "## Project setup ``` npm install ```",
-  "main": "babel.config.js",
   "author": "",
   "license": "ISC"
 }
