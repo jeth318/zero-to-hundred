@@ -184,7 +184,7 @@ export default {
       if (isNull(guess) || isNull(facit)) {
         return 0;
       }
-      return guess === facit ? -10 : facit - guess;
+      return guess === facit ? -10 : Math.abs(facit - guess);
     }
   },
   computed: {
@@ -275,6 +275,4 @@ export default {
   margin-bottom: 20px;
 }
 
-.restart-top-wrapper {
-}
 </style>
