@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <div>
-      <img class="logo-img" alt="logo" src="./assets/0-100.jpg" />
-    </div>
     <score-board />
   </div>
 </template>
