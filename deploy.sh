@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd /home/pi/Apps/zero-to-hundred/client
+cd /home/pi/Apps/zero-to-hundred
 echo "Stashing lock files"
 git stash
 
