@@ -9,5 +9,5 @@ export default defineConfig({
     styleImport({
       resolves: [VantResolve()],
     }),],
-  
+    base: '/zero-to-hundred/'
 })

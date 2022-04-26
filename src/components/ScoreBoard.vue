@@ -7,12 +7,6 @@ import { resetGameDialog } from "../utils/dialog.util";
 import QuestionItem from "./QuestionItem.vue";
 import GameHeader from "./GameHeader.vue";
 
-// functions that mutate state and trigger updates
-function onConfirm() {
-  store.game = defaultScoreBoard;
-  localStorage.removeItem("gameState");
-}
-
 function calculateScore(question: Question) {
   const { guess, facit } = question;
 
@@ -34,19 +28,6 @@ onMounted(() => {
 function onInputChanged(internalGuess: number, internalFacit: number) {
   console.log("input changed");
   console.log({ internalGuess, internalFacit });
-}
-
-function resetGame() {
-  store.game = defaultScoreBoard;
-}
-
-async function showDialog() {
-  try {
-    await Dialog.confirm(resetGameDialog);
-    onConfirm();
-  } catch (error) {
-    return null;
-  }
 }
 
 const getPartSum = (sectionId: String) => {
@@ -89,7 +70,7 @@ const sum: ComputedRef<number> = computed((): number => {
 
 <template>
   <div>
-    <GameHeader :sum="sum" @reset="resetGame"></GameHeader>
+    <GameHeader :sum="sum"></GameHeader>
     <div class="game-wrapper">
       <div v-for="(section, si) in store.game">
         <div class="score-facit-section">

@@ -2,6 +2,7 @@
 import { ComputedRef, computed, ref, onUpdated } from "vue";
 import { store } from "../store/store";
 import { Question } from "../utils/score-board-util";
+
 const props = defineProps({
   sectionIndex: { type: String },
   index: { type: Number, default: null },
@@ -23,6 +24,7 @@ onUpdated(() => {
 
 const onInputChanged = () => {
   const question: Question = {
+    id: props.question?.id,
     guess: internalGuess.value,
     facit: internalFacit.value,
   };

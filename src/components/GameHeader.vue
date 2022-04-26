@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { defineProps, watch, onMounted, ref } from "vue";
+import { defineProps, watch, ref } from "vue";
 import { Dialog } from "vant";
 import { resetGameDialog } from "../utils/dialog.util";
 import Vue3Autocounter from "vue3-autocounter";
+import { store } from "../store/store";
 
 const props = defineProps({
   sum: { type: Number },
@@ -14,24 +15,17 @@ let previosSum = ref(0);
 watch(
   () => props.sum,
   (sum, prevSum) => {
-    console.log("WATCH");
-    console.log({ sum, prevSum });
     if (prevSum) {
       previosSum.value = prevSum;
     }
   }
 );
 
-const emit = defineEmits(["reset"]);
-
-function onConfirm() {
-  localStorage.removeItem("gameState");
-  emit("reset");
-}
 async function showDialog() {
   try {
     await Dialog.confirm(resetGameDialog);
-    onConfirm();
+    store.reset();
+    localStorage.removeItem("gameState");
   } catch (error) {
     return null;
   }
