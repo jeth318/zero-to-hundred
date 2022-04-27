@@ -1,7 +1,7 @@
 #!/bin/sh
 branch=$(git branch --show-current)
 
-if [[ $branch != "main" ]]; then
+if [[ $branch == "main" ]]; then
     echo "On main branch. Will build and ship to server"
     npm run build
     echo "Shipping dist to server"
