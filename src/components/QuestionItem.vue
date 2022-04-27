@@ -27,6 +27,7 @@ const onInputChanged = () => {
     id: props.question?.id,
     guess: internalGuess.value,
     facit: internalFacit.value,
+    points: calculatedPoints.value,
   };
 
   switch (props.sectionIndex) {
@@ -59,6 +60,15 @@ const questionNumber: ComputedRef<number> = computed((): number => {
     default:
       return 0;
   }
+});
+
+const calculatedPoints: ComputedRef<number> = computed((): number => {
+  if (!internalGuess.value || !internalFacit.value) {
+    return 0;
+  }
+  return internalGuess.value === internalFacit.value
+    ? -10
+    : Math.abs(internalFacit.value - internalGuess.value);
 });
 
 const isValidGuess: ComputedRef<boolean> = computed((): boolean => {

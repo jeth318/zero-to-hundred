@@ -1,26 +1,36 @@
 <script setup lang="ts">
-import { ComputedRef, computed, watch, defineEmits } from "vue";
+import { computed, ComputedRef, watch, ref } from "vue";
 import { Question } from "../utils/score-board-util";
 const props = defineProps({
-  partSum: { type: Number },
+  section: { type: Object, default: {} },
 });
 
-const calculateScore = (question: Question): number => {
-  const { guess, facit } = question;
-  // eslint-disable-next-line no-console
+let previousSectionSum = ref(0);
 
-  if (!guess || !facit) {
-    return 0;
+const sectionSum: ComputedRef<number> = computed((): number => {
+  return props.section.reduce((a: any, b: Question) => a + b.points, 0);
+});
+
+watch(
+  () => sectionSum.value,
+  (sectionSum, pSectionSum) => {
+    previousSectionSum.value = pSectionSum;
   }
-  return guess === facit ? -10 : Math.abs(facit - guess);
-};
+);
 </script>
 
 <template>
   <div class="part-sum-wrapper">
     <div class="part-sum-text">
       Delsumma:
-      <strong>{{ props.partSum }}</strong>
+      <strong>
+        <Vue3Autocounter
+          ref="counter"
+          :startAmount="previousSectionSum"
+          :endAmount="sectionSum"
+          :duration="1"
+        ></Vue3Autocounter>
+      </strong>
     </div>
     <div class="part-sum-value"></div>
   </div>

@@ -11,12 +11,20 @@ const props = defineProps({
 
 const counter = ref(null);
 let previosSum = ref(0);
+let scoreUpdating = ref(false);
 
 watch(
   () => props.sum,
   (sum, prevSum) => {
     if (prevSum) {
       previosSum.value = prevSum;
+    }
+
+    if (sum) {
+      scoreUpdating.value = true;
+      setTimeout(() => {
+        scoreUpdating.value = false;
+      }, 1100);
     }
   }
 );
@@ -36,15 +44,17 @@ async function showDialog() {
     <div class="top-sum-wrapper">
       <div class="top-sum-inner-wrapper">
         <div>Total</div>
-        <div>
-          <b>
-            <Vue3Autocounter
-              ref="counter"
-              :startAmount="previosSum"
-              :endAmount="props.sum"
-              :duration="1"
-            ></Vue3Autocounter>
-          </b>
+        <div class="bounce-wrap">
+          <div :class="{ bounce: scoreUpdating }">
+            <b>
+              <Vue3Autocounter
+                ref="counter"
+                :startAmount="previosSum"
+                :endAmount="props.sum"
+                :duration="2"
+              ></Vue3Autocounter>
+            </b>
+          </div>
         </div>
       </div>
     </div>
@@ -109,5 +119,27 @@ async function showDialog() {
 img {
   height: 70px;
   border-radius: 10px;
+}
+
+.bounce {
+  position: relative;
+  bottom: 0;
+  -webkit-animation: bounce 500ms 2;
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    bottom: 2.5px;
+  }
+  25%,
+  75% {
+    bottom: 7.5px;
+  }
+  50% {
+    bottom: 10px;
+  }
+  100% {
+    bottom: 0;
+  }
 }
 </style>

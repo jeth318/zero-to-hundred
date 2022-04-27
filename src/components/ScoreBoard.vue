@@ -6,6 +6,7 @@ import { defaultScoreBoard, Question } from "../utils/score-board-util";
 import { resetGameDialog } from "../utils/dialog.util";
 import QuestionItem from "./QuestionItem.vue";
 import GameHeader from "./GameHeader.vue";
+import PartSum from "./PartSum.vue";
 
 function calculateScore(question: Question) {
   const { guess, facit } = question;
@@ -86,13 +87,7 @@ const sum: ComputedRef<number> = computed((): number => {
               :onInputChanged="onInputChanged"
             ></QuestionItem>
           </div>
-          <div class="part-sum-wrapper">
-            <div class="part-sum-text">
-              Delsumma:
-              <strong>{{ getPartSum(si) }}</strong>
-            </div>
-            <div class="part-sum-value"></div>
-          </div>
+          <PartSum :section="section"></PartSum>
         </div>
       </div>
     </div>
