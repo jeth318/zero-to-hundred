@@ -32,8 +32,8 @@ watch(
 async function showDialog() {
   try {
     await Dialog.confirm(resetGameDialog);
-    store.reset();
     localStorage.removeItem("gameState");
+    store.reset();
   } catch (error) {
     return null;
   }

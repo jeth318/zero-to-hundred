@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { onMounted, computed, ComputedRef } from "vue";
 import { store } from "../store/store";
-import { Dialog } from "vant";
-import { defaultScoreBoard, Question } from "../utils/score-board-util";
-import { resetGameDialog } from "../utils/dialog.util";
+import { Question } from "../utils/score-board-util";
 import QuestionItem from "./QuestionItem.vue";
 import GameHeader from "./GameHeader.vue";
 import PartSum from "./PartSum.vue";
