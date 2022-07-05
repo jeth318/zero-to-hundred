@@ -34,6 +34,7 @@ async function showDialog() {
     await Dialog.confirm(resetGameDialog);
     localStorage.removeItem("gameState");
     store.reset();
+    location.reload();
   } catch (error) {
     return null;
   }
