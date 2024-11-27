@@ -59,9 +59,6 @@ async function showDialog() {
         </div>
       </div>
     </div>
-    <div class="image-wrapper">
-      <img src="../assets/0-100.jpg" />
-    </div>
     <div class="restart-top-wrapper">
       <VanButton type="primary" class="reset-button" @click="showDialog"
         >Börja om</VanButton
